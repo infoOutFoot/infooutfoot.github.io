@@ -3,113 +3,765 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>OutFoot</title>
+    <title>OutFoot | South African Footwear Inspired by Nature</title>
+    <!-- Google Fonts - Open Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Basic reset and typography */
+        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #2d3b36; /* Earthy green */
+            --secondary: #f8f5f2; /* Soft sand */
+            --accent: #e05d2a; /* Earthy orange - African sunset */
+            --text: #333333;
+            --light-gray: #e0e0e0;
+            --dark-accent: #133a1b; /* Deep forest green */
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f0f0f0;
-            color: #333;
-            line-height: 1.5;
-        }
-
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 1em;
-            text-align: center;
-        }
-
-        .logo {
-            width: 50px;
-            height: auto;
-            vertical-align: middle;
-            margin-right: 0.5em;
+            font-family: 'Open Sans', sans-serif;
+            background-color: #ffffff;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 600px;
-            margin: 2em auto;
-            background: #fff;
-            padding: 2em;
-            border-radius: 8px;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
         }
 
-        h1 {
-            font-size: 2em;
-            margin-bottom: 0.5em;
+        /* Utility Classes (Tailwind-inspired) */
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .rounded-full {
+            border-radius: 9999px;
+        }
+
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+
+        .shadow-md {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .transition {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+        }
+
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.03);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            position: relative;
+            padding: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero {
+            min-height: 600px;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('desktop@0.5x.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,0));
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
+            align-items: center;
+        }
+
+        .logo {
+            width: 20rem;
+            height: auto;
+        }
+
+        .brand-name {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
             display: inline-block;
-            vertical-align: middle;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        h2 {
-            margin-bottom: 1em;
-            color: #333;
+        .cta-button:hover {
+            background-color: #c04d23;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        p {
-            margin-bottom: 1em;
+        /* Main Content */
+        .main-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+            color: var(--primary);
+        }
+
+        .section-subtitle {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #666;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent);
+            margin: 0.5rem auto;
+        }
+
+        .about-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 5rem;
+            padding: 2rem;
+            background-color: var(--secondary);
+            border-radius: 1rem;
+        }
+
+        .about-text {
+            max-width: 800px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Collections Section */
+        .collections-section {
+            margin-bottom: 5rem;
+        }
+
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .collection-card {
+            background-color: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .collection-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .collection-img-container {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .collection-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .collection-card:hover .collection-img {
+            transform: scale(1.05);
+        }
+
+        .collection-content {
+            padding: 1.5rem;
+        }
+
+        .collection-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .collection-subtitle {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .collection-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .collection-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--accent);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .collection-link:hover {
+            color: var(--dark-accent);
+        }
+
+        .collection-link i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .collection-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Heritage Section */
+        .heritage-section {
+            position: relative;
+            padding: 5rem 2rem;
+            background-color: var(--secondary);
+            margin-bottom: 5rem;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+
+        .heritage-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .heritage-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('desktop@0.5x.jpg') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .heritage-quote {
+            font-family: 'Open Sans', sans-serif;
+            font-style: italic;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .heritage-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+
+        /* Contact Section */
+        .contact-section {
+            background-color: var(--secondary);
+            border-radius: 1rem;
+            padding: 4rem 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
         }
 
         .contact-info {
-            margin-top: 1.5em;
-            background: #fafafa;
-            padding: 1em;
-            border-radius: 6px;
-            border: 1px solid #ddd;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
-        .contact-info h3 {
-            margin-bottom: 0.5em;
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
 
-        .contact-info p {
-            margin-bottom: 0.4em;
-        }
-
-        footer {
+        .contact-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
             text-align: center;
-            margin-top: 3em;
-            font-size: 0.9em;
-            color: #777;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .contact-title {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+        }
+
+        .contact-link i {
+            margin-right: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-logo {
+            width: 120px;
+            margin-bottom: 2rem;
+        }
+
+        .footer-tagline {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem 0.5rem;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 1rem;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .brand-name {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .heritage-quote {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .brand-name {
+                font-size: 1.5rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                padding: 1.5rem 1rem;
+            }
+
+            .logo-container {
+                margin-bottom: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+            }
+
+            .heritage-quote {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
 <body>
 <header>
-    <h1>
-        <img src="ofmidlands.png" alt="OutFoot Logo" class="logo" />
-        OutFoot
-    </h1>
-    <p>Your ultimate footwear companion</p>
+    <div class="nav-container">
+        <div class="logo-container">
+            <img src="ofmidlands.png" alt="OutFoot Logo" class="logo" />
+        </div>
+    </div>
+
+    <div class="hero">
+        <h1>South African Footwear</h1>
+        <div class="hero-subtitle">Inspired by Nature, Crafted with Passion</div>
+        <p>Discover our collection of premium footwear designed with the spirit and resilience of African wildlife</p>
+        <a href="#collections" class="cta-button">Explore Collections</a>
+    </div>
 </header>
 
-<div class="container">
-    <h2>Welcome to OutFoot</h2>
-    <p>
-        We are thrilled to help you find the perfect pair of shoes for any
-        occasion! Stay up-to-date with our latest footwear collections.
-        Browse our range and step up your style game with OutFoot.
-    </p>
-
-    <div class="contact-info">
-        <h3>Contact Us</h3>
-        <p>WhatsApp: 063 822 6555</p>
-        <p>
-            Instagram:
-            <a href="https://instagram.co.za/outfoot_za" target="_blank">instagram.co.za/outfoot_za</a>
+<main class="main-content">
+    <section class="about-section">
+        <h2 class="section-title">Our Story</h2>
+        <p class="about-text">
+            OutFoot is a South African footwear brand that draws inspiration from the country's rich wildlife heritage.
+            Our carefully curated collections reflect our commitment to durability, functionality, and style.
+            Each product line is named after iconic African animals, embodying their unique characteristics and
+            connecting our customers to the beauty of South African nature with every step they take.
         </p>
-    </div>
-</div>
+    </section>
+
+    <section id="collections" class="collections-section">
+        <h2 class="section-title">Our Collections</h2>
+        <div class="section-subtitle">
+            Each collection represents the characteristics of iconic African wildlife,
+            combining style with the spirit of nature
+        </div>
+
+        <div class="collections-grid">
+            <div class="collection-card hover-scale">
+                <div class="collection-img-container">
+                    <img src="best_foot_forward_1.jpg" alt="BushBabies Women's Leather Loafers" class="collection-img">
+                </div>
+                <div class="collection-content">
+                    <h3 class="collection-title">BushBabies</h3>
+                    <div class="collection-subtitle">Women's Leather Loafers</div>
+                    <p class="collection-description">
+                        Our BushBabies line offers women's leather loafers that combine elegance with practicality.
+                        Named after the small, agile primates native to Africa, these shoes embody lightweight
+                        and adaptable characteristics, perfect for both casual and semi-formal occasions.
+                    </p>
+                    <a href="#contact" class="collection-link">Discover more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="collection-card hover-scale">
+                <div class="collection-img-container">
+                    <img src="20240704_Rockport_Sole_1.jpg" alt="Rhinos Men's Rugged Footwear" class="collection-img">
+                </div>
+                <div class="collection-content">
+                    <h3 class="collection-title">Rhinos</h3>
+                    <div class="collection-subtitle">Men's Rugged Footwear</div>
+                    <p class="collection-description">
+                        The Rhinos collection features men's footwear built for durability and strength, mirroring the
+                        resilience of the rhinoceros. These shoes are designed to withstand tough conditions, making them
+                        ideal for outdoor activities and demanding environments.
+                    </p>
+                    <a href="#contact" class="collection-link">Discover more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="collection-card hover-scale">
+                <div class="collection-img-container">
+                    <img src="DSCF9989.jpg" alt="Mambas Sleek and Agile Designs" class="collection-img">
+                </div>
+                <div class="collection-content">
+                    <h3 class="collection-title">Mambas</h3>
+                    <div class="collection-subtitle">Sleek and Agile Designs</div>
+                    <p class="collection-description">
+                        Inspired by the swift and stealthy mamba snake, the Mambas line offers footwear that emphasizes
+                        agility and sleek design. These shoes are crafted for individuals who value speed and precision,
+                        providing a snug fit and streamlined appearance.
+                    </p>
+                    <a href="#contact" class="collection-link">Discover more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="collection-card hover-scale">
+                <div class="collection-img-container">
+                    <img src="black-and-tan-sataras-grass.jpg" alt="Sataras Versatile Women's Footwear" class="collection-img">
+                </div>
+                <div class="collection-content">
+                    <h3 class="collection-title">Sataras</h3>
+                    <div class="collection-subtitle">Versatile Women's Footwear</div>
+                    <p class="collection-description">
+                        The Sataras range provides versatile footwear options for women, blending style with comfort.
+                        These shoes are designed to transition seamlessly from day to night, offering both
+                        aesthetic appeal and practicality for the modern, active woman.
+                    </p>
+                    <a href="#contact" class="collection-link">Discover more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="heritage-section">
+        <div class="heritage-bg"></div>
+        <div class="heritage-content">
+            <h2 class="section-title">Our Heritage</h2>
+            <p class="heritage-quote">
+                "OutFoot's dedication to crafting footwear that embodies the spirit of African wildlife not only offers
+                consumers quality products but also fosters a deeper connection to nature."
+            </p>
+            <p class="heritage-text">
+                By choosing OutFoot, customers support a brand that values both functionality and the rich cultural heritage of South Africa.
+                Each pair tells a story of our country's magnificent wildlife and landscapes, bringing a piece of African spirit into everyday life.
+            </p>
+            <p class="heritage-text">
+                Our commitment extends beyond creating beautiful products—we strive to honor the natural world that inspires us
+                and create footwear that stands the test of time in both quality and design.
+            </p>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="section-subtitle">
+            Have questions about our collections or looking for a specific style?
+            We're here to help you find the perfect pair.
+        </div>
+
+        <div class="contact-info">
+            <div class="contact-methods">
+                <div class="contact-card hover-scale">
+                    <i class="fab fa-whatsapp contact-icon"></i>
+                    <h3 class="contact-title">WhatsApp</h3>
+                    <a href="https://wa.me/27638226555" class="contact-link" target="_blank">
+                        <i class="fas fa-comment"></i> 063 822 6555
+                    </a>
+                </div>
+
+                <div class="contact-card hover-scale">
+                    <i class="fab fa-instagram contact-icon"></i>
+                    <h3 class="contact-title">Instagram</h3>
+                    <a href="https://www.instagram.com/outfoot_za/" class="contact-link" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> @outfoot_za
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
 <footer>
-    © 2023 OutFoot. All rights reserved.
+    <div class="footer-content">
+        <img src="ofmidlands.png" alt="OutFoot Logo" class="footer-logo" />
+        <div class="footer-tagline">SOUTH AFRICAN FOOTWEAR INSPIRED BY NATURE</div>
+
+        <div class="social-links">
+            <a href="https://www.instagram.com/outfoot_za/" class="social-link" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/27638226555" class="social-link" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+
+        <div class="footer-nav">
+            <a href="#" class="footer-link">Home</a>
+            <a href="#collections" class="footer-link">Collections</a>
+            <a href="#contact" class="footer-link">Contact</a>
+        </div>
+
+        <p class="copyright">© 2025 OutFoot South Africa. All rights reserved.</p>
+    </div>
 </footer>
 </body>
 </html>
